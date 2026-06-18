@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viony Prajogo — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ───────────────────────────────────────────── */
+    :root {
+      --cream:   #FAF7F2;
+      --blush:   #F2C4CE;
+      --lilac:   #CFC4E8;
+      --mint:    #B8DDD6;
+      --peach:   #F7D9C4;
+      --ink:     #1A1522;
+      --muted:   #6B6478;
+      --line:    rgba(26,21,34,0.10);
+      --card-bg: #FFFFFF;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
+
+    /* ─── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 4rem;
+      background: rgba(250,247,242,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--ink); text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--blush); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* floating blobs */
+    #home::before, #home::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    #home::before {
+      width: 500px; height: 500px;
+      background: var(--lilac);
+      top: -100px; right: -80px;
+    }
+    #home::after {
+      width: 380px; height: 380px;
+      background: var(--blush);
+      bottom: -60px; left: 200px;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 28px; height: 1px;
+      background: var(--blush);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+    .hero-name .accent { color: var(--blush); }
+
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-tagline .sep { margin: 0 0.5rem; color: var(--lilac); }
+
+    .hero-bio {
+      font-size: 1rem; color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.4rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      font-family: var(--font-display);
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; border-radius: 100px;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--ink); color: var(--cream);
+      box-shadow: 0 4px 20px rgba(26,21,34,0.18);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(26,21,34,0.28); }
+
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--ink);
+    }
+    .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+    /* hero photo */
+    .hero-photo-wrap {
+      position: relative; z-index: 1;
+      display: flex; justify-content: center;
+    }
+    .hero-photo-frame {
+      position: relative;
+      width: 340px; height: 400px;
+    }
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: 16px -16px -16px 16px;
+      border-radius: 24px;
+      background: var(--lilac);
+      z-index: 0;
+    }
+    .hero-photo-frame img,
+    .hero-photo-placeholder {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      display: block;
+    }
+    .hero-photo-placeholder {
+      background: linear-gradient(135deg, var(--blush) 0%, var(--lilac) 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem;
+    }
+    .hero-photo-placeholder svg { opacity: 0.4; }
+    .hero-photo-placeholder p {
+      font-size: 0.75rem; color: var(--ink);
+      opacity: 0.5; text-align: center; max-width: 140px;
+    }
+
+    .hero-pill {
+      position: absolute; z-index: 2;
+      background: white;
+      border-radius: 100px;
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--ink);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      white-space: nowrap;
+    }
+    .pill-cgpa { bottom: 24px; left: -40px; }
+    .pill-uni  { top: 24px; right: -24px; }
+    .pill-honours { bottom: 24px; left: -40px; }
+
+    /* ─── SECTIONS ───────────────────────────────────────────── */
+    section { padding: 6rem 4rem; }
+    section:nth-child(even) { background: white; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block; width: 40px; height: 1px;
+      background: var(--blush);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text { font-size: 1rem; color: var(--muted); line-height: 1.85; }
+    .about-text p + p { margin-top: 1rem; }
+
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 1.4rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 800;
+      color: var(--ink); display: block;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); }
+
+    .skills-grid {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .skill-group-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.6rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--ink);
+    }
+    .tag-blush { background: var(--blush); }
+    .tag-lilac { background: var(--lilac); }
+    .tag-mint  { background: var(--mint); }
+    .tag-peach { background: var(--peach); }
+
+    /* ─── EXPERIENCE ─────────────────────────────────────────── */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 0;
+      width: 1px; background: var(--line);
+    }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .exp-item::before {
+      content: '';
+      position: absolute; left: -4px; top: 8px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--blush);
+      border: 2px solid var(--cream);
+    }
+    .exp-date {
+      font-size: 0.78rem; color: var(--muted);
+      font-weight: 500; padding-top: 0.2rem;
+    }
+    .exp-company {
+      font-family: var(--font-display);
+      font-size: 1rem; font-weight: 700;
+      color: var(--ink);
+    }
+    .exp-role {
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .exp-bullets { padding-left: 1rem; color: var(--muted); font-size: 0.9rem; }
+    .exp-bullets li { margin-bottom: 0.35rem; }
+
+    /* ─── PROJECTS ───────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--line);
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .project-card:nth-child(1)::before { background: var(--blush); }
+    .project-card:nth-child(2)::before { background: var(--lilac); }
+    .project-card:nth-child(3)::before { background: var(--mint); }
+    .project-card:nth-child(4)::before { background: var(--peach); }
+    .project-card:nth-child(5)::before { background: var(--blush); }
+    .project-card:nth-child(6)::before { background: var(--lilac); }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(26,21,34,0.10);
+    }
+    .project-type {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.875rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .project-links { display: flex; gap: 0.75rem; }
+    .project-link {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--ink);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.3rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: border-color .2s;
+    }
+    .project-link:hover { border-color: var(--ink); }
+
+    /* ─── CERTS ──────────────────────────────────────────────── */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .cert-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid var(--line);
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .cert-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cert-name {
+      font-family: var(--font-display);
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--ink); margin-bottom: 0.2rem;
+    }
+    .cert-issuer { font-size: 0.78rem; color: var(--muted); }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    #contact {
+      background: var(--ink);
+      color: var(--cream);
+      text-align: center;
+      padding: 7rem 4rem;
+    }
+    #contact .section-label { color: rgba(250,247,242,0.45); }
+    #contact .section-label::after { background: var(--blush); }
+    #contact .section-title { color: var(--cream); }
+
+    .contact-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      flex-wrap: wrap; margin-top: 2.5rem;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid rgba(250,247,242,0.2);
+      border-radius: 100px;
+      color: var(--cream); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500;
+      transition: background .2s, border-color .2s;
+    }
+    .contact-link:hover {
+      background: rgba(250,247,242,0.08);
+      border-color: rgba(250,247,242,0.5);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(250,247,242,0.08);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: rgba(250,247,242,0.3);
+    }
+    footer span { color: var(--blush); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── CLICKABLE IMAGES (lightbox trigger) ──────────────── */
+    .clickable-img {
+      cursor: zoom-in;
+      transition: filter .2s;
+    }
+    .clickable-img:hover { filter: brightness(0.92); }
+
+    /* ─── LIGHTBOX ───────────────────────────────────────────── */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(26,21,34,0.88);
+      display: flex; align-items: center; justify-content: center;
+      padding: 3rem;
+      opacity: 0; visibility: hidden;
+      transition: opacity .25s ease;
+    }
+    .lightbox-overlay.active { opacity: 1; visibility: visible; }
+    .lightbox-overlay img {
+      max-width: 90vw; max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      transform: scale(0.96);
+      transition: transform .25s ease;
+    }
+    .lightbox-overlay.active img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: 2rem; right: 2.5rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(250,247,242,0.12);
+      border: 1px solid rgba(250,247,242,0.25);
+      color: var(--cream);
+      font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(250,247,242,0.22); }
+    .lightbox-caption {
+      position: absolute; bottom: 2rem; left: 0; right: 0;
+      text-align: center; color: rgba(250,247,242,0.7);
+      font-size: 0.85rem;
+    }
+
+    /* ─── EXPERIENCE IMAGE ───────────────────────────────────── */
+    .exp-company-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 0.2rem;
+    }
+    .exp-logo {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .exp-photo {
+      margin-top: 0.9rem;
+      width: 220px;
+      max-width: 100%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 6px 20px rgba(26,21,34,0.10);
+    }
+
+    /* ─── PROJECT IMAGE ──────────────────────────────────────── */
+    .project-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .project-image-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .project-image-pair img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+      width: 100%; height: 160px;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; color: var(--muted);
+      background: repeating-linear-gradient(
+        45deg, rgba(26,21,34,0.04), rgba(26,21,34,0.04) 10px,
+        transparent 10px, transparent 20px
+      );
+      border: 1px dashed var(--line);
+      text-align: center;
+      padding: 0 1rem;
+    }
+    @media (max-width: 900px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { display: none; }
+      #home {
+        grid-template-columns: 1fr;
+        padding: 7rem 2rem 3rem;
+        text-align: center;
+      }
+      .hero-bio { max-width: 100%; margin-inline: auto; }
+      .hero-ctas { justify-content: center; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo-frame { width: 260px; height: 310px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      section { padding: 4rem 2rem; }
+      #contact { padding: 5rem 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#home">VP<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Based in Singapore &amp; Indonesia</div>
+      <h1 class="hero-name">Viony<br><span class="accent">Prajogo</span></h1>
+      <p class="hero-tagline">
+        AI &amp; Data Engineer
+        <span class="sep">/</span>
+        Tech Consultant
+      </p>
+      <p class="hero-bio">
+        Information Engineering &amp; Media student at NTU, building at the intersection of 
+        intelligent systems and human-centred design. I turn messy data and complex problems 
+        into things that actually work.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View My Work ↓</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <img src="static/images/profile.jpg" alt="Viony Prajogo" class="clickable-img" onclick="openLightbox('static/images/profile.jpg', 'Viony Prajogo')" />
+        <div class="hero-pill pill-uni">📍 NTU × NUS</div>
+        <div class="hero-pill pill-honours">🌏 4 Languages</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Who I Am</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-text">
+          <p>
+            I'm a second-year Information Engineering &amp; Media student at Nanyang Technological University (NTU), 
+            currently on exchange at NUS focusing on Innovation, Product Design &amp; Software Engineering. 
+            I'm on track for First Class Honours, with academic interests spanning both technical engineering and the design side of media and product.
+          </p>
+          <p>
+            My work sits at the crossroads of AI systems and real-world impact — whether that's building 
+            computer vision pipelines for robotics, engineering data-driven marketing strategies, or designing 
+            assistive technology for people with disabilities.
+          </p>
+          <p>
+            Outside of tech, I lead media and partnerships for Indonesia Cultural Night and contribute to 
+            the EEE Club's design and communications. I believe the best solutions are built by people who 
+            understand both the system and the human on the other side of it.
+          </p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Languages Spoken</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">4+</span>
+            <span class="stat-label">Work Experiences</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Technical Projects</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal skills-grid">
+        <div>
+          <div class="skill-group-title">AI &amp; Data</div>
+          <div class="skill-tags">
+            <span class="tag tag-blush">Python</span>
+            <span class="tag tag-blush">NumPy</span>
+            <span class="tag tag-blush">Pandas</span>
+            <span class="tag tag-blush">Scikit-Learn</span>
+            <span class="tag tag-blush">NLP</span>
+            <span class="tag tag-blush">OpenCV</span>
+            <span class="tag tag-blush">Machine Learning</span>
+            <span class="tag tag-blush">Tableau</span>
+            <span class="tag tag-blush">Power BI</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Engineering &amp; Web</div>
+          <div class="skill-tags">
+            <span class="tag tag-lilac">Java</span>
+            <span class="tag tag-lilac">C++</span>
+            <span class="tag tag-lilac">C#</span>
+            <span class="tag tag-lilac">SQL</span>
+            <span class="tag tag-lilac">MySQL</span>
+            <span class="tag tag-lilac">HTML/CSS</span>
+            <span class="tag tag-lilac">Apache Tomcat</span>
+            <span class="tag tag-lilac">Unity</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Tools &amp; Design</div>
+          <div class="skill-tags">
+            <span class="tag tag-mint">Git/GitHub</span>
+            <span class="tag tag-mint">Figma</span>
+            <span class="tag tag-mint">Adobe Photoshop</span>
+            <span class="tag tag-mint">Autodesk Fusion</span>
+            <span class="tag tag-mint">Excel (Power Query, Solver)</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-tags">
+            <span class="tag tag-peach">English</span>
+            <span class="tag tag-peach">Indonesian</span>
+            <span class="tag tag-peach">Malay</span>
+            <span class="tag tag-peach">Chinese</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="reveal">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Where I've Worked</h2>
+    </div>
+
+    <div class="timeline reveal">
+
+      <div class="exp-item">
+        <div class="exp-date">Nov 2025 – Jan 2026</div>
+        <div>
+          <div class="exp-company-row">
+            <!-- LOGO: add Engineering Good's logo, e.g.
+                 <img src="static/images/engineering-good-logo.png" class="exp-logo" alt="Engineering Good logo" /> -->
+            <div class="exp-company">Engineering Good</div>
+          </div>
+          <div class="exp-role">Assistive Technology Engineer</div>
+          <ul class="exp-bullets">
+            <li>Spearheaded customisation of 26+ assistive devices for Persons with Disabilities (PWDs), handling end-to-end development from circuit logic design to hardware integration.</li>
+            <li>Facilitated weekly technical workshops to ensure sustainable maintenance and scalability of assistive innovations.</li>
+          </ul>
+          <!-- WORK PHOTO: once uploaded, replace this comment with:
+               <img src="static/images/engineering-good-work.jpg" class="exp-photo clickable-img" alt="Working at Engineering Good"
+                    onclick="openLightbox('static/images/engineering-good-work.jpg', 'Engineering Good — Assistive Technology Engineer')" /> -->
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">May 2025 – Aug 2025</div>
+        <div>
+          <div class="exp-company">My Queen Pte Ltd</div>
+          <div class="exp-role">Digital Marketing &amp; Analytics Intern</div>
+          <ul class="exp-bullets">
+            <li>Used Google Analytics to segment user behaviour and refine sales strategies for regional markets.</li>
+            <li>Executed SEO and keyword frequency analysis (English &amp; Bahasa Indonesia), contributing to a 10% increase in organic web traffic.</li>
+            <li>Coordinated 3 regional events and managed cross-platform content for community engagement.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Oct 2024 – Jan 2025</div>
+        <div>
+          <div class="exp-company">MathVision Enrichment Centre</div>
+          <div class="exp-role">Mathematics Tutor</div>
+          <ul class="exp-bullets">
+            <li>Developed customised lesson plans for 8 O-Level students, resulting in a 4.5% improvement in pass rates through targeted learning objectives.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Jul 2022 – Aug 2024</div>
+        <div>
+          <div class="exp-company">CV Anugrah Jaya Santoso</div>
+          <div class="exp-role">Operations &amp; Sales Manager</div>
+          <ul class="exp-bullets">
+            <li>Synthesised 3 years of sales data with Excel to facilitate data-driven inventory management and procurement decisions.</li>
+            <li>Expanded market reach by 23% in Madura, Indonesia through targeted promotional campaigns.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="reveal">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">Things I've Built</h2>
+    </div>
+
+    <div class="projects-grid reveal">
+
+      <div class="project-card">
+        <div class="project-image-pair">
+          <img src="static/images/projects/inventorybro-help.jpg" class="clickable-img" alt="InventoryBRO command list"
+               onclick="openLightbox('static/images/projects/inventorybro-help.jpg', 'InventoryBRO — full command list')" />
+          <img src="static/images/projects/inventorybro-listitems.jpg" class="clickable-img" alt="InventoryBRO inventory listing"
+               onclick="openLightbox('static/images/projects/inventorybro-listitems.jpg', 'InventoryBRO — inventory listing with low-stock alerts')" />
+        </div>
+        <div class="project-type">Software Engineering / Team Project</div>
+        <div class="project-name">InventoryBRO</div>
+        <p class="project-desc">A Java-based inventory management system built as part of a 5-person team project, helping small businesses track stock levels, manage items, and stay on top of inventory through a fast, command-line-driven workflow with automatic low-stock alerts and category-based organisation.</p>
+        <div class="project-tech">
+          <span class="tag tag-lilac">Java</span>
+          <span class="tag tag-lilac">Gradle</span>
+          <span class="tag tag-lilac">JUnit</span>
+          <span class="tag tag-mint">NUS CS2113</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AY2526S2-CS2113-W09-3/tp" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="static/images/projects/moretea-robot.jpg" class="project-image clickable-img" alt="Moretea Robot face recognition demo"
+             onclick="openLightbox('static/images/projects/moretea-robot.jpg', 'Moretea Robot: Real-Time Face Recognition')" />
+        <div class="project-type">Computer Vision / Robotics</div>
+        <div class="project-name">Moretea Robot: Real-Time Face Recognition</div>
+        <p class="project-desc">Engineered a computer vision pipeline using MTCNN and FaceNet for face detection and feature embedding, deployed on a robot platform with OpenCV optimised for real-time performance.</p>
+        <div class="project-tech">
+          <span class="tag tag-blush">MTCNN</span>
+          <span class="tag tag-blush">FaceNet</span>
+          <span class="tag tag-blush">OpenCV</span>
+          <span class="tag tag-blush">Python</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/moretea-face-recognition" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-image-pair">
+          <img src="static/images/projects/house-price-feature-importance.jpg" class="clickable-img" alt="LightGBM feature importance chart"
+               onclick="openLightbox('static/images/projects/house-price-feature-importance.jpg', 'LightGBM Feature Importance — top 10 predictive features')" />
+          <img src="static/images/projects/house-price-cv-results.jpg" class="clickable-img" alt="Cross-validation results table"
+               onclick="openLightbox('static/images/projects/house-price-cv-results.jpg', '5-Fold Cross-Validation — model comparison')" />
+        </div>
+        <div class="project-type">Data Science / ML</div>
+        <div class="project-name">House Price Prediction</div>
+        <p class="project-desc">Full-cycle data science project on Kaggle — from EDA and feature engineering to model selection. Benchmarked Linear Regression, XGBoost, HistGradientBoosting, and LightGBM with 5-fold cross-validation and hyperparameter tuning; LightGBM came out on top with an R² of 0.92.</p>
+        <div class="project-tech">
+          <span class="tag tag-blush">Python</span>
+          <span class="tag tag-blush">LightGBM</span>
+          <span class="tag tag-blush">XGBoost</span>
+          <span class="tag tag-blush">Scikit-Learn</span>
+          <span class="tag tag-mint">Kaggle</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/house-price-prediction" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="static/images/projects/bookstore.jpg" class="project-image clickable-img" alt="Bookstore web app home page"
+             onclick="openLightbox('static/images/projects/bookstore.jpg', 'Full-Stack Bookstore Web App — catalogue page')" />
+        <div class="project-type">Full-Stack Web</div>
+        <div class="project-name">Full-Stack Bookstore Web App</div>
+        <p class="project-desc">A dynamic web application built with Java Servlets and Apache Tomcat, featuring robust back-end inventory management, secure user transactions, and modular design patterns.</p>
+        <div class="project-tech">
+          <span class="tag tag-lilac">Java</span>
+          <span class="tag tag-lilac">Apache Tomcat</span>
+          <span class="tag tag-lilac">HTML/CSS</span>
+          <span class="tag tag-lilac">SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/bookstore-webapp" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <video class="project-image" controls preload="metadata" poster="static/images/projects/horror-game.jpg">
+          <source src="static/images/projects/horror-game-demo.mp4" type="video/mp4">
+          Your browser doesn't support embedded video.
+        </video>
+        <div class="project-type">Game Development</div>
+        <div class="project-name">Horror Game Environment Design</div>
+        <p class="project-desc">Designed and prototyped an immersive 3D horror environment in Unity, with custom C# scripting for interactive elements. Players must search a derelict house for a key, avoid a hidden threat, and use objects like a lantern and gun to survive — built from scene composition and lighting to particle effects and player interaction logic.</p>
+        <div class="project-tech">
+          <span class="tag tag-peach">Unity</span>
+          <span class="tag tag-peach">C#</span>
+          <span class="tag tag-peach">3D Design</span>
+        </div>
+        <div class="project-links">
+          <span class="project-link" style="cursor:default; opacity:0.6;">Project file too large to host — see demo above</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <video class="project-image" controls preload="metadata" poster="static/images/projects/rental-analysis-poster.jpg">
+          <source src="static/images/projects/rental-analysis-demo.mp4" type="video/mp4">
+          Your browser doesn't support embedded video.
+        </video>
+        <div class="project-type">Data Analytics / Business Strategy</div>
+        <div class="project-name">Short-Term Rental Market Entry Analysis</div>
+        <p class="project-desc">A capstone analytics project (simulated client, Watershed Properties) evaluating short-term rental conversion potential across 244 properties. Built a linear regression model to predict occupancy from rent percentile, then used Excel Solver to optimize rent and identify 41 profitable properties worth $1.37M in year-one profit — validated through sensitivity testing across 9 key variables, and presented via an interactive Tableau dashboard.</p>
+        <div class="project-tech">
+          <span class="tag tag-mint">Tableau</span>
+          <span class="tag tag-mint">Excel Solver</span>
+          <span class="tag tag-mint">Regression</span>
+          <span class="tag tag-mint">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://public.tableau.com/app/profile/viony.prajogo/viz/WatershedProperties-ShortTermRentalAnalysis" class="project-link" target="_blank">Live Dashboard ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Let's Connect</h2>
+      <p style="color:rgba(250,247,242,0.55); max-width:480px; margin:0 auto; font-size:1rem;">
+        Open to internships, collaborations, and interesting conversations — 
+        especially at the intersection of AI, data, and real-world impact.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:viony001@e.ntu.edu.sg" class="contact-link">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          viony001@e.ntu.edu.sg
+        </a>
+        <a href="https://linkedin.com/in/viony-p" target="_blank" class="contact-link">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/vionyp" target="_blank" class="contact-link">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 <span>Viony Prajogo</span>. Designed &amp; built with intention.
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    function openLightbox(src, caption) {
+      lightboxImg.src = src;
+      lightboxImg.alt = caption || '';
+      lightboxCaption.textContent = caption || '';
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxOnBg(e) {
+      if (e.target === lightbox) closeLightbox();
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Stagger children of projects grid and certs grid
+    document.querySelectorAll('.projects-grid, .certs-grid, .stats-row').forEach(grid => {
+      Array.from(grid.children).forEach((child, i) => {
+        child.classList.add('reveal');
+        child.style.transitionDelay = `${i * 80}ms`;
+        observer.observe(child);
+      });
+    });
+  </script>
+
+</body>
+</html>
