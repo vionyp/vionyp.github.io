@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Analytics Portfolio — Viony Prajogo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:   #FAF7F2;
+      --blush:   #F2C4CE;
+      --lilac:   #CFC4E8;
+      --mint:    #B8DDD6;
+      --peach:   #F7D9C4;
+      --ink:     #1A1522;
+      --muted:   #6B6478;
+      --line:    rgba(26,21,34,0.10);
+      --card-bg: #FFFFFF;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--blush); border-radius: 3px; }
+
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .page-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .page-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--blush); }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .page-intro {
+      max-width: 680px; color: var(--muted);
+      font-size: 1rem; font-weight: 300; line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    .repo-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      background: var(--ink); color: var(--cream);
+      border-radius: 100px; text-decoration: none;
+      margin-bottom: 3.5rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .repo-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,21,34,0.22); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--line);
+      position: relative; overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,21,34,0.10); }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .project-card:nth-child(1)::before { background: var(--blush); }
+    .project-card:nth-child(2)::before { background: var(--lilac); }
+    .project-card:nth-child(3)::before { background: var(--mint); }
+    .project-card:nth-child(4)::before { background: var(--peach); }
+
+    .project-type {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem; font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.875rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .project-highlight {
+      font-size: 0.82rem; color: var(--ink);
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .tag {
+      padding: 0.3rem 0.85rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500; color: var(--ink);
+    }
+    .tag-blush { background: var(--blush); }
+    .tag-lilac { background: var(--lilac); }
+    .tag-mint  { background: var(--mint); }
+    .tag-peach { background: var(--peach); }
+
+    .project-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .project-link {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--ink); text-decoration: none;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 1px;
+    }
+    .project-link:hover { color: var(--muted); border-color: var(--muted); }
+
+    footer {
+      text-align: center; padding: 2.5rem 0 1rem;
+      font-size: 0.8rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <a href="index.html#projects" class="back-link">&larr; Back to Portfolio</a>
+
+    <div class="page-eyebrow">Featured Project Collection</div>
+    <h1 class="page-title">Data Analytics Portfolio</h1>
+    <p class="page-intro">
+      Four full-cycle data analytics projects spanning classification, time series forecasting,
+      NLP, and clustering — each covering EDA, feature engineering, model evaluation, and an
+      interactive dashboard.
+    </p>
+
+    <a href="https://github.com/vionyp/data-analytics-portfolio" class="repo-link" target="_blank">Full Repo on GitHub ↗</a>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-type">Classification / Fraud Detection</div>
+        <div class="project-name">Credit Card Fraud Detection</div>
+        <p class="project-desc">Detected fraudulent transactions in a highly imbalanced dataset (284,807 transactions, only 0.17% fraud) using SMOTE oversampling and comparing Logistic Regression against Random Forest.</p>
+        <div class="project-highlight">Random Forest: 92% precision, 75% recall — visualized in a Power BI fraud-risk monitoring dashboard.</div>
+        <div class="project-tech">
+          <span class="tag tag-blush">Python</span>
+          <span class="tag tag-blush">Scikit-learn</span>
+          <span class="tag tag-blush">SMOTE</span>
+          <span class="tag tag-mint">Power BI</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/data-analytics-portfolio/tree/main/Fraud%20Detection%20(Classification)" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">Time Series Forecasting</div>
+        <div class="project-name">Walmart Sales Forecasting</div>
+        <p class="project-desc">Forecasted Walmart's weekly sales using seasonal decomposition and Holt-Winters exponential smoothing, benchmarked against a seasonal-naive baseline and evaluated with Walmart's own WMAE metric.</p>
+        <div class="project-highlight">Found that a simple baseline can outperform a more complex model when historical data is limited — an honest, data-driven conclusion over a "fancier model wins" narrative.</div>
+        <div class="project-tech">
+          <span class="tag tag-lilac">Python</span>
+          <span class="tag tag-lilac">Statsmodels</span>
+          <span class="tag tag-lilac">Time Series</span>
+          <span class="tag tag-peach">Excel</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/data-analytics-portfolio/tree/main/Sales%20Forecasting%20(Time%20Series)" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">NLP / Text Classification</div>
+        <div class="project-name">IMDb Sentiment Analysis</div>
+        <p class="project-desc">Classified 50,000 IMDb movie reviews as positive or negative using TF-IDF vectorization, comparing Logistic Regression against Naive Bayes for automated review monitoring at scale.</p>
+        <div class="project-highlight">Logistic Regression: 89.2% accuracy — explored via an interactive Tableau dashboard with sentiment and confidence breakdowns.</div>
+        <div class="project-tech">
+          <span class="tag tag-mint">Python</span>
+          <span class="tag tag-mint">NLTK</span>
+          <span class="tag tag-mint">TF-IDF</span>
+          <span class="tag tag-blush">Tableau</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/data-analytics-portfolio/tree/main/Sentiment%20Analysis%20(NLP)" class="project-link" target="_blank">GitHub ↗</a>
+          <a href="https://public.tableau.com/views/IMDbSentimentAnalysisDashboard/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" class="project-link" target="_blank">Live Dashboard ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">Unsupervised Learning / Clustering</div>
+        <div class="project-name">Mall Customer Segmentation</div>
+        <p class="project-desc">Segmented mall customers into distinct personas using K-Means clustering on income and spending score, with the elbow method used to select the optimal number of clusters.</p>
+        <div class="project-highlight">5 business-ready personas identified (e.g. "Prime Targets", "Budget Conscious") to guide targeted marketing strategy.</div>
+        <div class="project-tech">
+          <span class="tag tag-peach">Python</span>
+          <span class="tag tag-peach">Scikit-learn</span>
+          <span class="tag tag-peach">K-Means</span>
+          <span class="tag tag-lilac">Plotly</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/vionyp/data-analytics-portfolio/tree/main/customer%20segmentation%20(clustering)" class="project-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>© 2026 Viony Prajogo</footer>
+  </div>
+
+</body>
+</html>
